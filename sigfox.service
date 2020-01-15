@@ -7,7 +7,7 @@ After=network.target
 Environment=NODE_PORT=8080
 Type=simple
 User=prio
-ExecStart=/usr/bin/node /var/wwww/bppt/index.js
+ExecStart=/usr/bin/node /var/www/bppt/index.js
 Restart=on-failure
 
 [Install]
