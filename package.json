@@ -1,0 +1,25 @@
+{
+  "name": "bppt",
+  "version": "1.0.0",
+  "description": "Sigfox Data Forwarder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halotec-rnd/bppt.git"
+  },
+  "keywords": [
+    "sigfox"
+  ],
+  "author": "Prio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/halotec-rnd/bppt/issues"
+  },
+  "homepage": "https://github.com/halotec-rnd/bppt#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
