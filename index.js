@@ -26,6 +26,7 @@ app.post('/sigfox', (req, res) => {
     const payload = req.body;
     console.log("body = ", payload);
 
+    var gpsdata = true;
     var NS = ''; var WE = '';
     var lat = -1; var lon = -1;
     var lathex = Buffer.alloc(4); lathex.fill(0);
@@ -48,7 +49,7 @@ app.post('/sigfox', (req, res) => {
                     lon = parseInt(byteArr[6].toString());
                     for (var i=0; i<3; i++) {lonhex[i+1]=byteArr[i+7]};
                     break;
-        default   : break;
+        default   : gpsdata = false; break;
     } ;
 
     // Convert Hex to float
@@ -58,24 +59,28 @@ app.post('/sigfox', (req, res) => {
     if ( NS == "S") { latfloat = -1*latfloat};
     if ( WE == "E") { lonfloat = -1*lonfloat};
 
-    // Prepare to forward
-    const options = {
-        method: 'POST',
-        url: fwd_url,
-        body: {
-            "deviceid": payload.deviceId, 
-            "time": payload.time.toString(),
-            "seqNumber": payload.seqNumber.toString(),
-            "latitude": latfloat.toString(),
-            "longitude": lonfloat.toString()
-        },
-        json: true
-    };
+    if ( gpsdata ) {
+        
+        // Prepare to forward
+        const options = {
+            method: 'POST',
+            url: fwd_url,
+            body: {
+                "deviceid": payload.deviceId, 
+                "time": payload.time.toString(),
+                "seqNumber": payload.seqNumber.toString(),
+                "latitude": latfloat.toString(),
+                "longitude": lonfloat.toString()
+            },
+            json: true
+        };
 
-    // Do forward
-    request(options)
-        .then( (response) => {console.log(response);} )
-        .catch( (error) => {console.log(error);} );
+        // Do forward
+        request(options)
+            .then( (response) => {console.log(response);} )
+            .catch( (error) => {console.log(error);} );
+
+    };
 
     res.status(202).send({status:'Successful',});
 });
