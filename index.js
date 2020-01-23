@@ -57,7 +57,7 @@ app.post('/sigfox', (req, res) => {
     lonfloat = lon + (lonhex.readUInt32BE(0) * 0.0000001);
 
     if ( NS == "S") { latfloat = -1*latfloat};
-    if ( WE == "E") { lonfloat = -1*lonfloat};
+    if ( WE == "W") { lonfloat = -1*lonfloat};
 
     if ( gpsdata ) {
         
