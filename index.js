@@ -53,8 +53,8 @@ app.post('/sigfox', (req, res) => {
     } ;
 
     // Convert Hex to float
-    latfloat = lat + (lathex.readUInt32BE(0) * 0.0000001); 
-    lonfloat = lon + (lonhex.readUInt32BE(0) * 0.0000001);
+    latfloat = lat + (lathex.readUInt32BE(0) * 0.000001); 
+    lonfloat = lon + (lonhex.readUInt32BE(0) * 0.000001);
 
     if ( NS == "S") { latfloat = -1*latfloat};
     if ( WE == "W") { lonfloat = -1*lonfloat};
